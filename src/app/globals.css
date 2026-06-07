@@ -239,6 +239,29 @@
     border-color: rgb(125 205 225 / 0.18);
   }
 
+  /* Sezione "colore" blu profondo (famiglia del logo): per il CTA di chiusura. */
+  .section-blue {
+    background-image:
+      radial-gradient(
+        95% 60% at 50% 48%,
+        rgb(var(--glow-rgb) / 0.18),
+        transparent 70%
+      ),
+      linear-gradient(
+        180deg,
+        var(--ink) 0%,
+        #112a57 38%,
+        #112a57 62%,
+        var(--ink) 100%
+      );
+  }
+  .section-blue .panel {
+    background-color: rgb(11 20 44 / 0.55);
+    backdrop-filter: blur(16px) saturate(1.15);
+    -webkit-backdrop-filter: blur(16px) saturate(1.15);
+    border-color: rgb(130 175 235 / 0.18);
+  }
+
   /* Divider 1px che sfuma ai lati (più premium del border pieno) */
   .hairline-top {
     position: relative;

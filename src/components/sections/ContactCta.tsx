@@ -14,7 +14,7 @@ const socials = [
 
 export function ContactCta() {
   return (
-    <Section id="contatti">
+    <Section id="contatti" tone="blue">
       <Reveal className="panel relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-16">
         <div
           className="glow-radial-top animate-glow-breathe pointer-events-none absolute inset-x-0 top-0 h-72"

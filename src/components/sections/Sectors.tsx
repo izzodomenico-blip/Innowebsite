@@ -7,7 +7,7 @@ import { sectors } from "@/content/site";
 
 export function Sectors() {
   return (
-    <Section id="settori">
+    <Section id="settori" tone="raised">
       <SectionHeading
         eyebrow="Settori"
         title="Soluzioni per chi muove materiali ogni giorno."
