@@ -1,0 +1,8 @@
+# Deploy su Netlify — Next.js 16 (App Router).
+# Il runtime Next di Netlify viene rilevato e installato automaticamente; questo
+# file rende esplicito il comando di build e il plugin ufficiale.
+[build]
+  command = "npm run build"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
