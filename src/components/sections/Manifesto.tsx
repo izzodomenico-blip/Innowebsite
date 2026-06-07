@@ -6,7 +6,7 @@ import { company } from "@/content/site";
 
 export function Manifesto() {
   return (
-    <Section id="manifesto">
+    <Section id="manifesto" tone="blue">
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
         <MotionReveal className="lg:col-span-4">
           <Eyebrow>Manifesto</Eyebrow>

@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { SectionColorGlow } from "@/components/motion/SectionColorGlow";
 
 interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   /** "raised" = superficie più chiara; "cool" = teal; "blue" = blu profondo. */
@@ -34,8 +35,12 @@ export function Section({
       )}
       {...props}
     >
+      {(tone === "cool" || tone === "blue") && <SectionColorGlow />}
       <div
-        className={cn("mx-auto max-w-7xl px-6 lg:px-8", containerClassName)}
+        className={cn(
+          "relative mx-auto max-w-7xl px-6 lg:px-8",
+          containerClassName
+        )}
       >
         {children}
       </div>
