@@ -20,6 +20,26 @@ Aggiunta **FASE G1 — Area Clienti & Documentazione Digitale (mockup frontend s
 - Content: `docCategories` + `clientArea` in site.ts (solo etichette di TIPO documento; **nessun cliente/documento finto**).
 - **Niente** auth reale, DB, credenziali salvate, conformità legale assoluta. Build + lint verdi.
 
+Aggiunta **FASE G2 — Architettura dati Area Clienti (solo design + tipi, niente backend/DB/Supabase/auth)**:
+- `src/types/customer-area.ts`: tipi delle 7 entità (Customer, UserProfile, Machine, Document, DocumentRevision, AccessLog, SupportTicket) + union di stato/ruolo/tipo + RBAC (`Permission`, `ROLE_PERMISSIONS`, `roleHasPermission`) + `DOCUMENT_RETENTION` (vita macchina + ≥10 anni). Dominio camelCase; DB sarà snake_case.
+- `docs/customer-area-architecture.md`: doc tecnica interna — entità/relazioni, 4 ruoli + matrice permessi, logica QR (token opaco `publicCode`, QR senza segreti), pubblico vs privato, flussi login e download (signed URL + AccessLog), regole di sicurezza (RLS multi-tenant, storage privato), retention, struttura storage, integrazione Supabase futura (DDL/RLS illustrative da NON eseguire), fuori-scope.
+- **Nessun** dato reale, nessun file di documento, nessuna riga di backend. Il mockup G1 resta invariato. Build + lint verdi.
+
+Aggiunta **FASE G2.5 — review severa + hardening del modello (solo tipi + doc, niente backend)**. Verdetto pre-review: "quasi pronta". Applicate tutte le correzioni a `src/types/customer-area.ts` (v2) e `docs/customer-area-architecture.md` (v2):
+- **Document**: file rimossi → fonte unica `DocumentRevision` via `currentRevisionId`. `fileUrl`→`storagePath`.
+- **DocumentRevision** arricchita: `revisionNumber`, `revisionLabel`, `storagePath`, `fileName`, `fileSize`, `mimeType`, `checksum`, `validFrom`, `createdBy`.
+- **Customer**: `+codiceCliente` (unique). **Machine**: `publicCode` obbligatorio+unique, `qrCodeUrl` derivato, `+commissionedAt`. **AccessLog**: `customerId` obbligatorio + `revisionId`.
+- **RBAC**: `+user:manage:own-customer` (clienteAdmin); `manutentore` → solo documenti tecnici (`document:read:technical` + `TECHNICAL_DOCUMENT_TYPES`); ticket `own` per user/manutentore, `own-customer` per clienteAdmin. Helper `machineQrPath`, `isTechnicalDocumentType`, `ACCESS_LOG_RETENTION_MONTHS`.
+- **Nuove entità**: `TicketMessage` (thread) + `MachineAssignment` (opz./futuro: manutentore INNO.TEC cross-tenant, non usata in v1).
+- **Decisioni documentate**: naming IT campi + EN valori/tipi; manutentore lato cliente + tecnici; viewer non aggiunto (4 ruoli); ticket own vs azienda.
+- Doc: enforcement RLS (`stato='active'`), middleware route, append-only via grant, signed URL, PDF fuori da `public/`, storage `StorageProvider` (S3-ready), retention + log retention, piano G3 (G3.0→G3.12). Build + lint verdi.
+
+Aggiunta **FASE G3 (fondazione as-code, NIENTE eseguito, niente segreti)** — completata la parte che non richiede il progetto cloud dell'utente:
+- `supabase/migrations/0001_init_schema.sql` (tabelle, indici, `qr_code_url` generato, trigger coerenza tenant + updated_at), `0002_rls_policies.sql` (RLS multi-tenant, helper `app_role/app_customer_id/app_is_active/app_is_admin` SECURITY DEFINER, manutentore solo tipi tecnici, ticket own vs azienda, access_logs append-only con revoke update/delete), `0003_storage.sql` (bucket privato `customer-docs`).
+- `supabase/README.md` (istruzioni di applicazione + cosa deve fare l'utente), `.env.example` (placeholder, niente segreti; `.gitignore` aggiornato con `!.env.example`), `src/lib/storage/provider.ts` (interfaccia `StorageProvider` provider-agnostica).
+- **Le migrazioni NON sono state eseguite** (nessun progetto Supabase, nessuna chiave nel repo): sono draft da validare in DEV. Il **mockup G1 di `/area-clienti` resta intatto e funzionante**.
+- **Blocco esterno**: per G3.6+ (client Supabase, middleware, login reale, dashboard, lista macchine, documenti, download signed URL) servono il progetto Supabase dell'utente + le chiavi (URL/anon pubbliche, service role segreta) — non creabili dall'agente. Build + lint verdi.
+
 La homepage è ora una one-page strutturata in 9 sezioni con i contenuti reali di **Inno.Tec S.r.l.** (material handling). Sono stati rimossi tutti i dati inventati e le stringhe di sviluppo visibili. La build di produzione (`npm run build`) e il lint (`npm run lint`) si completano con **0 errori e 0 warning**; nessun errore in console.
 
 Look mantenuto: **Cinematic Industrial Dark** (sfondo near-black, accento ciano, bordi 1px, glassmorphism, grana sottile). **Animazioni avanzate volutamente NON ancora introdotte** (no GSAP/Lenis, no scroll-reveal): rimandate alla fase Motion.
