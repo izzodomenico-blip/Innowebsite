@@ -130,6 +130,8 @@ export const sectors: Sector[] = [
     description:
       "Ottimizzazione dei flussi di materiale per centri logistici e di distribuzione ad alta intensità.",
     icon: Truck,
+    video: "/renders/logistica.mp4",
+    poster: "/renders/logistica-poster.jpg",
   },
   {
     id: "industria",
@@ -137,6 +139,8 @@ export const sectors: Sector[] = [
     description:
       "Sistemi di material handling custom, ingegnerizzati sulle specifiche esigenze del processo produttivo.",
     icon: Factory,
+    video: "/renders/industria.mp4",
+    poster: "/renders/industria-poster.jpg",
   },
 ];
 
