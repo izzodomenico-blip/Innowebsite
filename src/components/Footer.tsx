@@ -17,7 +17,7 @@ export function Footer() {
                 alt="INNO.TEC"
                 width={769}
                 height={180}
-                className="h-8 w-auto"
+                className="h-10 w-auto"
               />
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-zinc-500">

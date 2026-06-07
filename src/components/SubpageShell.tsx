@@ -19,7 +19,7 @@ export function SubpageShell({ children }: { children: React.ReactNode }) {
               width={769}
               height={180}
               priority
-              className="h-8 w-auto"
+              className="h-10 w-auto"
             />
           </Link>
           <Link

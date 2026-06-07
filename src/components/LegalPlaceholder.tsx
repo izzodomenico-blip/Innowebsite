@@ -27,7 +27,7 @@ export function LegalPlaceholder({ title, description }: LegalPlaceholderProps) 
               alt="INNO.TEC"
               width={769}
               height={180}
-              className="h-8 w-auto"
+              className="h-10 w-auto"
             />
           </Link>
         </div>
