@@ -15,9 +15,9 @@ export function Footer() {
               <Image
                 src="/logo-innotec.png"
                 alt="INNO.TEC"
-                width={360}
-                height={86}
-                className="h-7 w-auto"
+                width={769}
+                height={180}
+                className="h-8 w-auto"
               />
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-zinc-500">

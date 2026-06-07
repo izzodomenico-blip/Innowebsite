@@ -38,10 +38,10 @@ export function Navbar() {
             <Image
               src="/logo-innotec.png"
               alt="INNO.TEC"
-              width={360}
-              height={86}
+              width={769}
+              height={180}
               priority
-              className="h-7 w-auto"
+              className="h-8 w-auto"
             />
           </Link>
 
