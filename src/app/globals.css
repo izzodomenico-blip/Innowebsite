@@ -214,6 +214,31 @@
     box-shadow: var(--shadow-panel);
   }
 
+  /* Sezione "colore" fredda (Apple-style): teal/ciano che sboccia sul nero,
+     sfumando in alto e in basso verso il nero delle sezioni adiacenti. */
+  .section-cool {
+    background-image:
+      radial-gradient(
+        95% 60% at 50% 48%,
+        rgb(var(--glow-rgb) / 0.22),
+        transparent 70%
+      ),
+      linear-gradient(
+        180deg,
+        var(--ink) 0%,
+        #0e3e52 38%,
+        #0e3e52 62%,
+        var(--ink) 100%
+      );
+  }
+  /* Sulle sezioni fredde i pannelli diventano vetro teal: il colore traspare. */
+  .section-cool .panel {
+    background-color: rgb(12 52 68 / 0.55);
+    backdrop-filter: blur(16px) saturate(1.15);
+    -webkit-backdrop-filter: blur(16px) saturate(1.15);
+    border-color: rgb(125 205 225 / 0.18);
+  }
+
   /* Divider 1px che sfuma ai lati (più premium del border pieno) */
   .hairline-top {
     position: relative;

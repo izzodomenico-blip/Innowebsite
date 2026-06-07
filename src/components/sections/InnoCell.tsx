@@ -10,7 +10,7 @@ import { innocell, renders } from "@/content/site";
 
 export function InnoCell() {
   return (
-    <Section id="inno-cell">
+    <Section id="inno-cell" tone="cool">
       <Reveal className="panel relative overflow-hidden rounded-3xl p-8 sm:p-12 lg:p-16">
         {/* Glow di prodotto su due angoli */}
         <div

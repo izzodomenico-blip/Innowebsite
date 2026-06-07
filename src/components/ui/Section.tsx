@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
 interface SectionProps extends React.HTMLAttributes<HTMLElement> {
-  /** "raised" applica una tinta di superficie leggermente più chiara. */
-  tone?: "base" | "raised";
+  /** "raised" = tinta superficie più chiara; "cool" = pannello colore freddo. */
+  tone?: "base" | "raised" | "cool";
   /** Mostra il divider 1px sfumato in alto (default true). */
   divider?: boolean;
   containerClassName?: string;
@@ -28,6 +28,7 @@ export function Section({
         "relative py-24 sm:py-28 lg:py-32",
         divider && "hairline-top",
         tone === "raised" && "bg-white/[0.015]",
+        tone === "cool" && "section-cool",
         className
       )}
       {...props}
